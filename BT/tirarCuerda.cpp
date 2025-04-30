@@ -13,7 +13,9 @@ struct resultadoStruct{
 typedef resultadoStruct * resultado;
 
 void generar(int nivel, vector<int>& s){
-    s[nivel-1]++;
+    if (s[nivel - 1] < 1) {
+        s[nivel - 1]++;
+    }
 }
 
 void asignar(resultado s, int nivel, const vector<int>& pesos, int equipo) {
@@ -31,7 +33,7 @@ bool solucion(int nivel, int n, resultado s){
 }
 
 bool criterio(int nivel, int n){
-    return nivel < n;
+    return nivel <= n;
 }
 
 bool masHermanos(int nivel, vector<int>& s) {
@@ -53,7 +55,7 @@ resultado backtracking(vector<int> pesos){
     int nivel = 1;
     vector<int> s(n,-1);
     int voa = __INT_MAX__;
-    resultado soa = new resultadoStruct;
+    resultado soa = new resultadoStruct{ 0, 0, 0, 0 };
     resultado estado = new resultadoStruct{0, 0, 0, 0};
 
     while (nivel!=0){
@@ -85,7 +87,7 @@ resultado backtracking(vector<int> pesos){
             }
         }
     }
-    printf("%d %d %d %d\n",soa->nDer, soa->nIzq, soa->pDer,soa->pIzq);
+    cout << soa->pIzq << " " << soa->pDer << endl;
     delete estado;
 
     return soa;
